@@ -1,12 +1,11 @@
 {
-  "name": "day-1",
+  "name": "day_1",
   "version": "1.0.0",
   "description": "",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "jest"
+    "start": "node index.js"
   },
   "author": "thomas herzog",
   "license": "ISC"
