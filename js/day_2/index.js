@@ -13,31 +13,37 @@ const beforeFire = array => {
 
 function intCodeProcessor(intCode) {
   const mutatedIntCode = [...intCode];
-  for (let i = 0; i < intCode.length; i += 4) {
+  for (
+    let instructionPointer = 0;
+    instructionPointer < intCode.length;
+    instructionPointer += 4
+  ) {
     const [
       opcode,
-      operantIndex1,
-      operantIndex2,
-      resultantIndex
-    ] = mutatedIntCode.slice(i, i + 4);
-    const operantValue1 = mutatedIntCode[operantIndex1];
-    const operantValue2 = mutatedIntCode[operantIndex2];
+      firstParameterAddress,
+      secondParameterAddress,
+      thirdParameterAddress
+    ] = mutatedIntCode.slice(instructionPointer, instructionPointer + 4);
+    const firstParameterValue = mutatedIntCode[firstParameterAddress];
+    const secondParameterValue = mutatedIntCode[secondParameterAddress];
 
     switch (opcode) {
       case 1:
         //add
-        mutatedIntCode[resultantIndex] = operantValue1 + operantValue2;
+        mutatedIntCode[thirdParameterAddress] =
+          firstParameterValue + secondParameterValue;
         break;
       case 2:
         // Multiply
-        mutatedIntCode[resultantIndex] = operantValue1 * operantValue2;
+        mutatedIntCode[thirdParameterAddress] =
+          firstParameterValue * secondParameterValue;
         break;
       case 99:
         // END
         return mutatedIntCode;
         break;
       default:
-        throw new Error(`Unknown Opcode: ${opcode}`);
+        return undefined;
 
         break;
     }
