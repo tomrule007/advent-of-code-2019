@@ -54,3 +54,25 @@ const processedIntCode = intCodeProcessor(beforeFire(intCode));
 console.log(processedIntCode[0]); // answer: 5866714
 
 // Part 2
+const insertNounAndVerb = (noun, verb, array) => {
+  const modifiedArray = [...array];
+  modifiedArray[1] = noun;
+  modifiedArray[2] = verb;
+  return modifiedArray;
+};
+function findNounAndVerbForOutput(output, intCode) {
+  for (let noun = 0; noun <= 99; noun++) {
+    for (let verb = 0; verb <= 99; verb++) {
+      const processedIntCode = intCodeProcessor(
+        insertNounAndVerb(noun, verb, intCode)
+      );
+      if (processedIntCode && processedIntCode[0] === output) {
+        return { noun, verb };
+      }
+    }
+  }
+  throw new Error('Part 2 answer Not found!');
+}
+const { noun, verb } = findNounAndVerbForOutput(19690720, intCode);
+const partTwoAnswer = 100 * noun + verb;
+console.log({ partTwoAnswer }); // answer: 5208
